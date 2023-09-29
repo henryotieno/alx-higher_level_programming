@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-"""displays the value of the X-Request-Id variable found in
-the header of the response.
+""" Sends request to URL provided as command and display the
+    value of the X-Request-Id found in the header of the response
 """
-
+from sys import argv
+import urllib.request as req
 
 if __name__ == "__main__":
-    import urllib.request
-    import sys
+    url = argv[1]
 
-    with urllib.request.urlopen(sys.argv[1]) as response:
-        head = response.headers.get('X-Request-Id')
-        print(head)
+    with req.urlopen(url) as response:
+        print(dict(response.headers).get("X-Request-Id"))
